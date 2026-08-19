@@ -1,0 +1,2436 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ResumeIQ | AI Resume Analyzer</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    font-family: "Inter", sans-serif;
+
+    color: #17221b;
+
+    background:
+        radial-gradient(
+            circle at 10% 5%,
+            rgba(34,197,94,0.10),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 90% 25%,
+            rgba(134,239,172,0.14),
+            transparent 28%
+        ),
+        #f8fbf9;
+
+    min-height: 100vh;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND GRID
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.45;
+
+    background-image:
+
+        linear-gradient(
+            rgba(22,163,74,0.035) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(22,163,74,0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 75%
+        );
+
+    z-index: -1;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(255,255,255,0.88);
+
+    backdrop-filter:
+        blur(18px);
+
+    border-bottom:
+        1px solid
+        rgba(22,163,74,0.08);
+}
+
+.nav-container {
+
+    max-width: 1250px;
+
+    height: 72px;
+
+    margin: auto;
+
+    padding: 0 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* LOGO */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    font-size: 21px;
+
+    font-weight: 800;
+
+    letter-spacing: -0.7px;
+
+    color: #17221b;
+}
+
+.logo-mark {
+
+    width: 34px;
+
+    height: 34px;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #4ade80
+        );
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 22px
+        rgba(22,163,74,0.22);
+}
+
+.logo span {
+
+    color: #16a34a;
+}
+
+
+/* NAV LINKS */
+
+.nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 30px;
+}
+
+.nav-links a {
+
+    color: #64756b;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 500;
+
+    transition: 0.25s;
+}
+
+.nav-links a:hover {
+
+    color: #15803d;
+}
+
+.nav-button {
+
+    padding: 10px 17px;
+
+    border-radius: 9px;
+
+    color: #15803d !important;
+
+    background:
+        #f0fdf4;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    font-weight: 600 !important;
+}
+
+.nav-button:hover {
+
+    background:
+        #dcfce7;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        90px 28px 85px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.08fr
+        0.92fr;
+
+    gap: 75px;
+
+    align-items: center;
+
+    min-height: 700px;
+}
+
+
+/* HERO CONTENT */
+
+.hero-content {
+
+    max-width: 700px;
+}
+
+.badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 8px 14px;
+
+    border-radius: 50px;
+
+    background:
+        #f0fdf4;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    color: #15803d;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    margin-bottom: 24px;
+}
+
+.badge-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 12px
+        rgba(34,197,94,0.55);
+}
+
+
+/* HERO HEADING */
+
+.hero h1 {
+
+    font-size:
+        clamp(45px, 5.5vw, 74px);
+
+    line-height: 1.04;
+
+    letter-spacing: -4px;
+
+    font-weight: 800;
+
+    color: #17221b;
+
+    margin-bottom: 25px;
+}
+
+.gradient-text {
+
+    background:
+        linear-gradient(
+            90deg,
+            #15803d,
+            #16a34a,
+            #4ade80
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color:
+        transparent;
+}
+
+
+/* DESCRIPTION */
+
+.hero-description {
+
+    color: #64756b;
+
+    font-size: 16px;
+
+    line-height: 1.85;
+
+    max-width: 620px;
+
+    margin-bottom: 30px;
+}
+
+
+/* HERO BUTTONS */
+
+.hero-actions {
+
+    display: flex;
+
+    gap: 13px;
+
+    margin-top: 25px;
+}
+
+.primary-button {
+
+    padding: 14px 22px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 28px
+        rgba(22,163,74,0.22);
+
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 15px 35px
+        rgba(22,163,74,0.30);
+}
+
+.secondary-button {
+
+    padding: 14px 22px;
+
+    border-radius: 10px;
+
+    background:
+        white;
+
+    border:
+        1px solid
+        #dce7df;
+
+    color: #486054;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.secondary-button:hover {
+
+    background:
+        #f0fdf4;
+
+    border-color:
+        #bbf7d0;
+
+    color: #15803d;
+}
+
+
+/* HERO STATS */
+
+.hero-stats {
+
+    display: flex;
+
+    gap: 38px;
+
+    margin-top: 42px;
+}
+
+.stat strong {
+
+    display: block;
+
+    font-size: 22px;
+
+    font-weight: 700;
+
+    color: #1f3327;
+}
+
+.stat span {
+
+    color: #819188;
+
+    font-size: 11px;
+
+    margin-top: 4px;
+
+    display: block;
+}
+
+
+/* =========================================================
+   UPLOAD CARD
+========================================================= */
+
+.upload-card {
+
+    position: relative;
+
+    background:
+        rgba(255,255,255,0.92);
+
+    border:
+        1px solid
+        #dce9df;
+
+    border-radius: 22px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 25px 70px
+        rgba(28,70,45,0.10);
+
+    overflow: hidden;
+}
+
+.upload-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+
+    height: 230px;
+
+    top: -140px;
+
+    right: -100px;
+
+    background:
+        rgba(74,222,128,0.22);
+
+    filter:
+        blur(70px);
+
+    pointer-events: none;
+}
+
+.upload-title {
+
+    font-size: 20px;
+
+    font-weight: 700;
+
+    color: #1f3327;
+
+    margin-bottom: 7px;
+}
+
+.upload-subtitle {
+
+    color: #7a8a81;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================================
+   DROP ZONE
+========================================================= */
+
+.drop-zone {
+
+    border:
+        1.5px dashed
+        #86c99c;
+
+    border-radius: 15px;
+
+    padding: 34px 20px;
+
+    text-align: center;
+
+    background:
+        #f7fcf8;
+
+    cursor: pointer;
+
+    transition:
+        0.3s ease;
+}
+
+.drop-zone:hover,
+.drop-zone.dragover {
+
+    border-color:
+        #22a653;
+
+    background:
+        #effcf3;
+
+    box-shadow:
+        inset 0 0 30px
+        rgba(34,197,94,0.05);
+}
+
+.upload-icon {
+
+    width: 54px;
+
+    height: 54px;
+
+    margin:
+        0 auto 14px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        #ecfdf3;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    font-size: 23px;
+}
+
+.drop-zone h3 {
+
+    font-size: 14px;
+
+    color: #24382b;
+
+    margin-bottom: 7px;
+}
+
+.drop-zone p {
+
+    color: #8a9890;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+.file-name {
+
+    color: #16a34a;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin-top: 12px;
+
+    word-break: break-word;
+}
+
+#resume {
+
+    display: none;
+}
+
+
+/* =========================================================
+   JOB DESCRIPTION
+========================================================= */
+
+.form-label {
+
+    display: block;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    margin:
+        22px 0 9px;
+
+    color: #405247;
+}
+
+textarea {
+
+    width: 100%;
+
+    height: 125px;
+
+    resize: none;
+
+    outline: none;
+
+    border-radius: 11px;
+
+    border:
+        1px solid
+        #dce7df;
+
+    background:
+        #fbfdfb;
+
+    color: #26382d;
+
+    padding: 13px;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+
+    transition: 0.25s;
+}
+
+textarea:focus {
+
+    border-color:
+        #69bd83;
+
+    background:
+        white;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,0.08);
+}
+
+textarea::placeholder {
+
+    color: #a3afa8;
+}
+
+
+/* =========================================================
+   ANALYZE BUTTON
+========================================================= */
+
+.analyze-button {
+
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #22c55e
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.analyze-button:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 32px
+        rgba(22,163,74,0.25);
+}
+
+
+/* =========================================================
+   VIDEO SECTION
+========================================================= */
+
+.video-section {
+
+    position: relative;
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        45px 28px 100px;
+}
+
+.video-heading {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.video-heading .eyebrow {
+
+    color: #16a34a;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.video-heading h2 {
+
+    font-size:
+        clamp(28px, 4vw, 42px);
+
+    color: #1c2d23;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 10px;
+}
+
+.video-heading p {
+
+    color: #7b8981;
+
+    font-size: 13px;
+}
+
+
+/* VIDEO FRAME */
+
+.video-wrapper {
+
+    position: relative;
+
+    height: 560px;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        #d4e7d9;
+
+    background:
+        #dcefe1;
+
+    box-shadow:
+        0 30px 80px
+        rgba(31,76,49,0.13);
+
+    transform:
+        scale(0.96);
+
+    opacity: 0.72;
+
+    transition:
+        transform 0.15s linear,
+        opacity 0.15s linear;
+}
+
+.video-wrapper video {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    filter:
+        brightness(0.62)
+        saturate(0.80)
+        contrast(1.02);
+}
+
+
+/* VIDEO OVERLAY */
+
+.video-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(9,35,19,0.78),
+            rgba(15,55,29,0.35),
+            rgba(9,35,19,0.60)
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.video-content {
+
+    max-width: 600px;
+
+    padding: 30px;
+}
+
+.video-content .small-label {
+
+    color: #bbf7d0;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 15px;
+}
+
+.video-content h3 {
+
+    color: white;
+
+    font-size:
+        clamp(28px, 4vw, 48px);
+
+    letter-spacing: -2px;
+
+    margin-bottom: 15px;
+}
+
+.video-content p {
+
+    color: #e2f4e7;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+}
+
+.video-wrapper::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    border-radius: inherit;
+
+    box-shadow:
+        inset 0 0 100px
+        rgba(34,197,94,0.12);
+}
+
+
+/* =========================================================
+   GENERAL SECTION
+========================================================= */
+
+.section {
+
+    max-width: 1250px;
+
+    margin: auto;
+
+    padding:
+        90px 28px;
+}
+
+.section-heading {
+
+    text-align: center;
+
+    margin-bottom: 45px;
+}
+
+.section-heading .eyebrow {
+
+    color: #16a34a;
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.section-heading h2 {
+
+    font-size: 34px;
+
+    color: #1c2d23;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 10px;
+}
+
+.section-heading p {
+
+    color: #7b8981;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.features {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 17px;
+}
+
+.feature {
+
+    padding: 25px;
+
+    min-height: 205px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,0.88);
+
+    border:
+        1px solid
+        #dfeae2;
+
+    transition:
+        0.3s ease;
+}
+
+.feature:hover {
+
+    transform:
+        translateY(-6px);
+
+    background:
+        #ffffff;
+
+    border-color:
+        #a7dcb7;
+
+    box-shadow:
+        0 20px 45px
+        rgba(31,76,49,0.10);
+}
+
+.feature-icon {
+
+    width: 42px;
+
+    height: 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background:
+        #ecfdf3;
+
+    border:
+        1px solid
+        #bbf7d0;
+
+    color: #16a34a;
+
+    font-size: 18px;
+
+    margin-bottom: 19px;
+}
+
+.feature h3 {
+
+    font-size: 14px;
+
+    color: #25382c;
+
+    margin-bottom: 9px;
+}
+
+.feature p {
+
+    color: #7b8981;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about {
+
+    max-width: 780px;
+
+    margin: auto;
+
+    text-align: center;
+}
+
+.about p {
+
+    color: #66766c;
+
+    font-size: 13px;
+
+    line-height: 2;
+}
+
+
+/* =========================================================
+   PROCESS
+========================================================= */
+
+.process-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+}
+
+.process-card {
+
+    padding: 28px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(255,255,255,0.90);
+
+    border:
+        1px solid
+        #dfeae2;
+
+    text-align: center;
+
+    transition: 0.3s;
+}
+
+.process-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    border-color:
+        #b8e3c5;
+
+    box-shadow:
+        0 18px 40px
+        rgba(31,76,49,0.08);
+}
+
+.process-number {
+
+    width: 42px;
+
+    height: 42px;
+
+    margin:
+        0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #16a34a,
+            #4ade80
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 22px
+        rgba(22,163,74,0.20);
+}
+
+.process-card h3 {
+
+    font-size: 14px;
+
+    color: #25382c;
+
+    margin-bottom: 9px;
+}
+
+.process-card p {
+
+    color: #7b8981;
+
+    font-size: 11px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    border-top:
+        1px solid
+        #dfeae2;
+
+    background:
+        rgba(255,255,255,0.65);
+
+    text-align: center;
+
+    padding:
+        35px 20px;
+
+    color: #89968f;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+.footer-brand {
+
+    color: #25382c;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width: 950px) {
+
+    .hero {
+
+        grid-template-columns: 1fr;
+
+        padding-top: 75px;
+    }
+
+    .hero-content {
+
+        text-align: center;
+
+        margin: auto;
+    }
+
+    .hero-description {
+
+        margin:
+            0 auto 30px;
+    }
+
+    .hero-actions {
+
+        justify-content: center;
+    }
+
+    .hero-stats {
+
+        justify-content: center;
+    }
+
+    .features {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .video-wrapper {
+
+        height: 450px;
+    }
+}
+
+
+@media(max-width: 600px) {
+
+    .nav-links {
+
+        display: none;
+    }
+
+    .nav-container {
+
+        padding:
+            0 18px;
+    }
+
+    .hero {
+
+        padding:
+            65px 17px 60px;
+    }
+
+    .hero h1 {
+
+        letter-spacing: -2.5px;
+    }
+
+    .hero-actions {
+
+        flex-direction: column;
+    }
+
+    .primary-button,
+    .secondary-button {
+
+        text-align: center;
+    }
+
+    .hero-stats {
+
+        gap: 22px;
+    }
+
+    .upload-card {
+
+        padding: 20px;
+    }
+
+    .features {
+
+        grid-template-columns: 1fr;
+    }
+
+    .process-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .video-section,
+    .section {
+
+        padding-left: 17px;
+
+        padding-right: 17px;
+    }
+
+    .video-wrapper {
+
+        height: 390px;
+
+        border-radius: 18px;
+    }
+
+    .video-content {
+
+        padding: 20px;
+    }
+
+    .video-content h3 {
+
+        letter-spacing: -1px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
+
+<nav class="navbar">
+
+<div class="nav-container">
+
+<div class="logo">
+
+<div class="logo-mark">
+RI
+</div>
+
+Resume<span>IQ</span>
+
+</div>
+
+
+<div class="nav-links">
+
+<a href="#home">
+Home
+</a>
+
+<a href="#features">
+Features
+</a>
+
+<a href="#process">
+How it works
+</a>
+
+<a href="#about">
+About
+</a>
+
+<a
+href="#analyze"
+class="nav-button">
+
+Analyze Resume
+
+</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+
+<!-- =======================================================
+     HERO
+======================================================= -->
+
+<section
+class="hero"
+id="home">
+
+
+<div class="hero-content">
+
+
+<div class="badge">
+
+<div class="badge-dot"></div>
+
+AI-POWERED RESUME INTELLIGENCE
+
+</div>
+
+
+<h1>
+
+Build a resume that
+
+<span class="gradient-text">
+gets noticed.
+</span>
+
+</h1>
+
+
+<p class="hero-description">
+
+ResumeIQ analyzes your resume using
+ATS scoring, NLP-based job matching,
+technical skill detection and intelligent
+career recommendations.
+
+Make every application more targeted,
+relevant and professional.
+
+</p>
+
+
+<div class="hero-actions">
+
+<a
+href="#analyze"
+class="primary-button">
+
+Analyze My Resume →
+
+</a>
+
+
+<a
+href="#features"
+class="secondary-button">
+
+Explore Features
+
+</a>
+
+</div>
+
+
+<div class="hero-stats">
+
+
+<div class="stat">
+
+<strong>ATS</strong>
+
+<span>
+Compatibility Analysis
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>NLP</strong>
+
+<span>
+Semantic Matching
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>AI</strong>
+
+<span>
+Career Insights
+</span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- =======================================================
+     UPLOAD CARD
+======================================================= -->
+
+<div
+class="upload-card"
+id="analyze">
+
+
+<div class="upload-title">
+
+Analyze your resume
+
+</div>
+
+
+<div class="upload-subtitle">
+
+Upload a PDF resume and optionally provide
+a target job description.
+
+</div>
+
+
+<form
+action="/upload"
+method="POST"
+enctype="multipart/form-data">
+
+
+<div
+class="drop-zone"
+id="dropZone"
+onclick="document.getElementById('resume').click()">
+
+
+<div class="upload-icon">
+
+📄
+
+</div>
+
+
+<h3>
+
+Upload PDF Resume
+
+</h3>
+
+
+<p>
+
+Drag & drop your resume here
+
+</p>
+
+
+<p>
+
+or click to browse
+
+</p>
+
+
+<div
+class="file-name"
+id="fileName">
+
+No file selected
+
+</div>
+
+
+</div>
+
+
+<input
+type="file"
+id="resume"
+name="resume"
+accept=".pdf"
+required>
+
+
+<label
+class="form-label">
+
+Target Job Description
+
+</label>
+
+
+<textarea
+name="job_description"
+placeholder="Paste the target job description here for detailed job compatibility analysis..."></textarea>
+
+
+<button
+class="analyze-button"
+type="submit">
+
+Analyze Resume →
+
+</button>
+
+
+</form>
+
+
+</div>
+
+
+</section>
+
+
+
+<!-- =======================================================
+     VIDEO SECTION
+======================================================= -->
+
+<section
+class="video-section"
+id="technology">
+
+
+<div class="video-heading">
+
+<div class="eyebrow">
+
+THE RESUMEIQ EXPERIENCE
+
+</div>
+
+<h2>
+
+Intelligence behind every application.
+
+</h2>
+
+<p>
+
+From resume parsing to job matching,
+every stage is analyzed intelligently.
+
+</p>
+
+</div>
+
+
+<div
+class="video-wrapper"
+id="videoWrapper">
+
+
+<video
+id="heroVideo"
+autoplay
+muted
+loop
+playsinline
+preload="metadata">
+
+<source
+src="{{ url_for('static', filename='videos/resume-ai.mp4') }}"
+type="video/mp4">
+
+Your browser does not support the video element.
+
+</video>
+
+
+<div class="video-overlay">
+
+
+<div class="video-content">
+
+
+<div class="small-label">
+
+AI-DRIVEN ANALYSIS
+
+</div>
+
+
+<h3>
+
+From resume to insight.
+
+</h3>
+
+
+<p>
+
+ResumeIQ combines structured resume analysis,
+technical skill intelligence and NLP-powered
+job compatibility to create a complete
+career-readiness report.
+
+</p>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FEATURES
+======================================================= -->
+
+<section
+class="section"
+id="features">
+
+
+<div class="section-heading">
+
+<div class="eyebrow">
+
+CORE CAPABILITIES
+
+</div>
+
+
+<h2>
+
+Everything you need to optimize your resume.
+
+</h2>
+
+
+<p>
+
+Professional analysis tools designed around modern recruitment.
+
+</p>
+
+</div>
+
+
+<div class="features">
+
+
+<div class="feature">
+
+<div class="feature-icon">
+◈
+</div>
+
+<h3>
+
+ATS Compatibility
+
+</h3>
+
+<p>
+
+Evaluate resume structure, section coverage,
+technical skills and contact information
+for ATS-friendly characteristics.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+◇
+</div>
+
+<h3>
+
+NLP Job Matching
+
+</h3>
+
+<p>
+
+Compare your resume with a target job
+using TF-IDF and cosine similarity
+to measure semantic relevance.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+✦
+</div>
+
+<h3>
+
+Skill Intelligence
+
+</h3>
+
+<p>
+
+Detect technical skills from your resume
+and identify relevant skills missing
+from the target job requirements.
+
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+↗
+</div>
+
+<h3>
+
+Career Insights
+
+</h3>
+
+<p>
+
+Discover suitable career roles based
+on your detected technical skills
+and receive personalized suggestions.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     HOW IT WORKS
+======================================================= -->
+
+<section
+class="section"
+id="process">
+
+
+<div class="section-heading">
+
+<div class="eyebrow">
+
+SIMPLE WORKFLOW
+
+</div>
+
+
+<h2>
+
+Three steps to a stronger resume.
+
+</h2>
+
+
+<p>
+
+Analyze, understand and improve.
+
+</p>
+
+</div>
+
+
+<div class="process-grid">
+
+
+<div class="process-card">
+
+<div class="process-number">
+01
+</div>
+
+<h3>
+
+Upload
+
+</h3>
+
+<p>
+
+Upload your resume as a PDF
+and optionally provide the job
+description you're targeting.
+
+</p>
+
+</div>
+
+
+<div class="process-card">
+
+<div class="process-number">
+02
+</div>
+
+<h3>
+
+Analyze
+
+</h3>
+
+<p>
+
+ResumeIQ evaluates ATS compatibility,
+skills, sections, keywords and
+semantic job similarity.
+
+</p>
+
+</div>
+
+
+<div class="process-card">
+
+<div class="process-number">
+03
+</div>
+
+<h3>
+
+Improve
+
+</h3>
+
+<p>
+
+Receive strengths, weaknesses,
+career recommendations and a
+personalized improvement plan.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     ABOUT
+======================================================= -->
+
+<section
+class="section"
+id="about">
+
+
+<div class="about">
+
+
+<div class="section-heading">
+
+<div class="eyebrow">
+
+ABOUT RESUMEIQ
+
+</div>
+
+
+<h2>
+
+Built for smarter career decisions.
+
+</h2>
+
+</div>
+
+
+<p>
+
+ResumeIQ is an AI-powered resume analysis
+platform built with Python, Flask,
+NLP and Scikit-learn.
+
+<br><br>
+
+Instead of simply checking whether keywords
+exist, the system evaluates resume structure,
+technical skills, ATS compatibility, job
+relevance and semantic similarity.
+
+<br><br>
+
+The result is a comprehensive report that
+helps candidates understand their strengths,
+identify gaps and make their resume more
+aligned with their target career.
+
+</p>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+<div class="footer-brand">
+
+ResumeIQ
+
+</div>
+
+AI Resume Analyzer
+
+<br>
+
+Python • Flask • NLP • Scikit-learn
+
+<br><br>
+
+© 2026 ResumeIQ. Built for smarter career decisions.
+
+</footer>
+
+
+
+<!-- =======================================================
+     JAVASCRIPT
+======================================================= -->
+
+<script>
+
+
+/* =========================================================
+   FILE UPLOAD
+========================================================= */
+
+const fileInput =
+document.getElementById("resume");
+
+const dropZone =
+document.getElementById("dropZone");
+
+const fileName =
+document.getElementById("fileName");
+
+
+fileInput.addEventListener(
+"change",
+function() {
+
+    if (this.files.length > 0) {
+
+        const file =
+            this.files[0];
+
+        if (
+            file.type !== "application/pdf" &&
+            !file.name.toLowerCase().endsWith(".pdf")
+        ) {
+
+            fileName.textContent =
+                "Please select a PDF file";
+
+            this.value = "";
+
+            return;
+        }
+
+        fileName.textContent =
+            file.name;
+
+    }
+
+});
+
+
+/* =========================================================
+   DRAG OVER
+========================================================= */
+
+dropZone.addEventListener(
+"dragover",
+function(event) {
+
+    event.preventDefault();
+
+    dropZone.classList.add(
+        "dragover"
+    );
+
+});
+
+
+/* =========================================================
+   DRAG LEAVE
+========================================================= */
+
+dropZone.addEventListener(
+"dragleave",
+function() {
+
+    dropZone.classList.remove(
+        "dragover"
+    );
+
+});
+
+
+/* =========================================================
+   DROP
+========================================================= */
+
+dropZone.addEventListener(
+"drop",
+function(event) {
+
+    event.preventDefault();
+
+    dropZone.classList.remove(
+        "dragover"
+    );
+
+    const files =
+        event.dataTransfer.files;
+
+    if (files.length > 0) {
+
+        const file =
+            files[0];
+
+        if (
+            file.type !== "application/pdf" &&
+            !file.name.toLowerCase().endsWith(".pdf")
+        ) {
+
+            fileName.textContent =
+                "Please drop a PDF file";
+
+            return;
+        }
+
+        fileInput.files =
+            files;
+
+        fileName.textContent =
+            file.name;
+
+    }
+
+});
+
+
+/* =========================================================
+   SCROLLING VIDEO EFFECT
+========================================================= */
+
+const videoWrapper =
+document.getElementById(
+    "videoWrapper"
+);
+
+
+function updateVideoEffect() {
+
+    if (!videoWrapper) {
+        return;
+    }
+
+    const rect =
+        videoWrapper.getBoundingClientRect();
+
+    const windowHeight =
+        window.innerHeight;
+
+    const center =
+        rect.top +
+        rect.height / 2;
+
+    const distance =
+        Math.abs(
+            center -
+            windowHeight / 2
+        );
+
+    const maxDistance =
+        windowHeight / 2 +
+        rect.height / 2;
+
+    let visibility =
+        1 -
+        distance / maxDistance;
+
+    visibility =
+        Math.max(
+            0,
+            Math.min(
+                1,
+                visibility
+            )
+        );
+
+    const scale =
+        0.94 +
+        visibility * 0.06;
+
+    const opacity =
+        0.60 +
+        visibility * 0.40;
+
+    videoWrapper.style.transform =
+        `scale(${scale})`;
+
+    videoWrapper.style.opacity =
+        opacity;
+
+}
+
+
+window.addEventListener(
+"scroll",
+updateVideoEffect,
+{
+    passive: true
+});
+
+
+window.addEventListener(
+"load",
+updateVideoEffect
+);
+
+
+/* =========================================================
+   VIDEO AUTOPLAY FALLBACK
+========================================================= */
+
+const video =
+document.getElementById(
+    "heroVideo"
+);
+
+
+if (video) {
+
+    video.muted = true;
+
+    const playPromise =
+        video.play();
+
+    if (
+        playPromise !== undefined
+    ) {
+
+        playPromise.catch(
+            function() {
+
+                document.addEventListener(
+                    "click",
+                    function() {
+
+                        video.play();
+
+                    },
+                    {
+                        once: true
+                    }
+                );
+
+            }
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   NAVBAR SCROLL EFFECT
+========================================================= */
+
+window.addEventListener(
+"scroll",
+function() {
+
+    const navbar =
+        document.querySelector(
+            ".navbar"
+        );
+
+    if (
+        window.scrollY > 20
+    ) {
+
+        navbar.style.background =
+            "rgba(255,255,255,0.96)";
+
+        navbar.style.boxShadow =
+            "0 5px 25px rgba(20,60,35,0.05)";
+
+    } else {
+
+        navbar.style.background =
+            "rgba(255,255,255,0.88)";
+
+        navbar.style.boxShadow =
+            "none";
+
+    }
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>
+```
